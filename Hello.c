@@ -52,13 +52,40 @@ void myDisplay(void)
 		
 		
 		//making the spaceship (another triangle)
+		
 		glVertex2i(300, 210);	//spaceship
-		glVertex2i(320, 240);
-		glVertex2i(320, 240);
-		glVertex2i(330, 210);		
+		glVertex2i(325, 250);
+		glVertex2i(325, 250);
+		glVertex2i(340, 210);
+								//bottom of spaceship
 		glVertex2i(300, 210);		
-		glVertex2i(330, 210);		
-
+		glVertex2i(340, 210);	
+		
+								//left wing
+		glVertex2i(300, 210);		
+		glVertex2i(310, 195);
+				
+		glVertex2i(300, 210);										
+		glVertex2i(295, 220);
+		
+		glVertex2i(295, 220);
+		glVertex2i(280, 195);
+		
+		glVertex2i(280, 195);
+		glVertex2i(310, 195);
+		
+								//right wing
+		//glVertex2i(350, 210);		
+		//glVertex2i(360, 195);
+				
+		glVertex2i(350, 220);										
+		glVertex2i(330, 195);
+		
+		glVertex2i(350, 220);
+		glVertex2i(330, 195);
+		
+		glVertex2i(330, 195);
+		glVertex2i(360, 195);
 		
 
 	glEnd();
@@ -84,6 +111,8 @@ void myDisplay(void)
 	
 	
 	glRasterPos2f(35, 450);				// sets drawing point 
+	
+	
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1');	//draws number 1
 	//glRasterPos2f(175, 200);				// sets new drawing point 
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');	//draws number 3
@@ -91,7 +120,20 @@ void myDisplay(void)
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3'); //draws number 3	
 	//glRasterPos2f(225, 200);				
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
-	//glRasterPos2f(250, 200);				
+	//glRasterPos2f(250, 200);
+	
+	
+	glRasterPos2f(280, 100);								//coordinates for my name		
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	//draws number prints my name
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'Y');					
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ':');					
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'J');					
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'U');					
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'A');				
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'N');					
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ' ');				
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');					
+				
 
 	glFlush(); // send all output to display 
 }
