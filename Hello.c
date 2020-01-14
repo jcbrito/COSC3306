@@ -1,5 +1,6 @@
 /*Use this at the top of your file to make it compile on either Windows or Linux without requiring any
 modification:*/
+#include <dos.h>
 #ifdef _WIN32
 #include <windows.h>
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
@@ -12,14 +13,29 @@ modification:*/
     int nameX = 280;
     
     //spaceship coordinates
-    int point1X = 200;
-    int point1Y = 200;
+    int point1X = 200; //point a
+    int point1Y = 200; 
+
     
-    int point2X = 300;
-    int point2Y = 200;
+    //asteroid coordinates
     
-    int point3X = 250;
-    int point3Y = 320;
+    int roid1X = 400;
+    int roid1Y = 400;
+    
+    int roid2X = 100;
+    int roid2Y = 190;
+    
+    int roid3X = 400;
+    int roid3Y = 200;
+    
+    //roid speeds
+ 	int roidSpeed1 = 1;
+ 	int roidSpeed2 = 1;
+ 	int roidSpeed3 = 1;
+ 	
+ 	//ship speed
+	int shipSpeed = 1;
+    
     
 
 //You will need to add this to the 'build' (linker) option from your compiler:  -lGL -lglut -lGLU
@@ -36,6 +52,7 @@ modification:*/
 //<<<<<<<<<<<<<<<<<<<<<<<< myDisplay >>>>>>>>>>>>>>>>>
 void myDisplay(void)
 {
+	for(int i = 0; i < 1900; i++){
 	glClear(GL_COLOR_BUFFER_BIT); // clears the screen 
 	glBegin(GL_LINES); // draws points
 		// using these coordinates
@@ -67,72 +84,182 @@ void myDisplay(void)
 	
 	
 	// this is the spaceship
-	glBegin(GL_POLYGON);
+	glBegin(GL_LINES);
 	
+		    
 	
-		int num = rand() % 6; //random number between 0 and 5 to choose 
+		int num = rand() % 3 ; //random number between 0 and 5 to choose 
 		
 		switch (num)
 		{
 			case 0:					//moves ship to the right
-				point1X += 5;
-				point2X += 5;
-				point3X += 5;
+				point1X += shipSpeed;
 				break;
 				
 			case 1:
-				point1Y += 5;		//moves the ship up
-				point2Y += 5;
-				point3Y += 5;
-				break;	
+				point1Y += shipSpeed;
+				break;
 			
 			case 2:
-				point1X -= 5;		//moves the ship to the left
-				point2X -= 5;
-				point3X -= 5;
+				point1X += shipSpeed;
+				point1Y += shipSpeed;
 				break;
-
-			
-			case 3:
-				point1Y -= 5;		//moves the ship down
-				point2Y -= 5;
-				point3Y -= 5;
-				break;			
-			
-			case 4:
-				point1X += 5;
-				point2X += 5;
-				point3X += 5;
-				point1Y += 5;
-				point2Y += 5;
-				point3Y += 5;
-				break;
-				
-			case 5:
-				point1X -= 5;
-				point2X -= 5;
-				point3X -= 5;
-				point1Y -= 5;
-				point2Y -= 5;
-				point3Y -= 5;
-				break;				
-				
+									
 		} 
 		
+				//drawing the ship relative to 
+				// the starting point
+				int point2X = point1X + 50; //point b
+				int point2Y = point1Y + 30;
+				
+				
+				int point3X = point2X + 50; //point c
+				int point3Y = point2Y - 30;
+				
+				int point4X = point3X - 50; //point d
+				int point4Y = point2Y + 120;
+					
 		
-				point1X %= 560;
-				point2X %= 560;
-				point3X %= 560;
-				point1Y %= 440;
-				point2Y %= 440;
-				point3Y %= 440;
+			if(point1X < 40){ //keep the ship in shape
+				
+				shipSpeed *= -1 ;
+				
+				}
+			else if(point1X > 520){
+				shipSpeed *= -1 ;
+				}
+				
+			if(point4Y > 460){
+				shipSpeed *= -1;
+			}
+			
+			else if(point1Y < 40){
+				shipSpeed *= -1;
+			
+			}		
 	
 		glColor3f(1,0,0);
-		glVertex2i(point1X, point1Y);
+							
+		//drawing the ship 
+		glVertex2i(point1X, point1Y); //Point A		
 		glVertex2i(point2X, point2Y);
+		
+		glVertex2i(point2X, point2Y); //Point B
 		glVertex2i(point3X, point3Y);
+		
+		glVertex2i(point3X, point3Y); //Point C
+		glVertex2i(point4X, point4Y);
+		
+		glVertex2i(point4X, point4Y); //Point D
+		glVertex2i(point1X, point1Y);
+
 	
 	glEnd();
+	
+	
+			// drwaing some asteroids 
+	glBegin(GL_LINES);
+	
+		glColor3f(1,1,1);
+		
+		
+		roid1X += roidSpeed1;
+		
+		if(roid1X > 490){
+			roidSpeed1 *= -1;
+		}
+		else if( roid1X < 399){
+			roidSpeed1 *= -1;
+
+		}
+		
+		
+		glVertex2i(roid1X, roid1Y);				//point A
+		glVertex2i(roid1X + 10, roid1Y + 50);
+		
+		glVertex2i(roid1X + 10, roid1Y + 50);	//Point B
+		glVertex2i(roid1X + 50, roid1Y + 50);
+
+		glVertex2i(roid1X + 50, roid1Y + 50);	//Point C
+		glVertex2i(roid1X + 70, roid1Y + 25);
+
+		glVertex2i(roid1X + 70, roid1Y + 25);	//Point D
+		glVertex2i(roid1X + 50, roid1Y );
+
+		glVertex2i(roid1X + 50, roid1Y );		//Point E
+		glVertex2i(roid1X + 25, roid1Y + 25);
+	
+		glVertex2i(roid1X + 25, roid1Y + 25);	//Point F
+		glVertex2i(roid1X, roid1Y);
+		
+		
+		// second asteroid
+		
+				
+		if(roid2Y > 280){
+			roidSpeed2 *= -1;
+		}
+		else if( roid2Y < 150){
+			roidSpeed2 *= -1;
+
+		}
+		
+		roid2Y += roidSpeed2;
+		glVertex2i(roid2X, roid2Y);				//point A
+		glVertex2i(roid2X + 10, roid2Y + 50);
+		
+		glVertex2i(roid2X + 10, roid2Y + 50);	//Point B
+		glVertex2i(roid2X + 50, roid2Y + 50);
+
+		glVertex2i(roid2X + 50, roid2Y + 50);	//Point C
+		glVertex2i(roid2X + 70, roid2Y + 25);
+
+		glVertex2i(roid2X + 70, roid2Y + 25);	//Point D
+		glVertex2i(roid2X + 50, roid2Y );
+
+		glVertex2i(roid2X + 50, roid2Y );	//Point E
+		glVertex2i(roid2X + 25, roid2Y + 25);
+	
+		glVertex2i(roid2X + 25, roid2Y + 25);	//Point F
+		glVertex2i(roid2X, roid2Y);
+		
+		// third asteroid
+		
+		
+		if(roid3Y > 280){
+			roidSpeed3 *= -1;
+		}
+		else if( roid3Y < 190){
+			roidSpeed3 *= -1;
+
+		}
+		
+		roid3Y += roidSpeed3;
+
+		
+		glVertex2i(roid3X, roid3Y);				//point A
+		glVertex2i(roid3X + 10, roid3Y + 50);
+		
+		glVertex2i(roid3X + 10, roid3Y + 50);	//Point B
+		glVertex2i(roid3X + 50, roid3Y + 50);
+
+		glVertex2i(roid3X + 50, roid3Y + 50);	//Point C
+		glVertex2i(roid3X + 70, roid3Y + 25);
+
+		glVertex2i(roid3X + 70, roid3Y + 25);	//Point D
+		glVertex2i(roid3X + 50, roid3Y );
+
+		glVertex2i(roid3X + 50, roid3Y );	//Point E
+		glVertex2i(roid3X + 25, roid3Y + 25);
+	
+		glVertex2i(roid3X + 25, roid3Y + 25);	//Point F
+		glVertex2i(roid3X, roid3Y);		
+		
+
+	glEnd();
+	
+	
+	
 	
 	glColor3f(1,1,1);
 	
@@ -156,21 +283,27 @@ void myDisplay(void)
 	
 	
 	glRasterPos2f(35, 450);				// sets drawing point 
+
+	float red = (float)rand()/(float)(RAND_MAX);
+	float green = (float)rand()/(float)(RAND_MAX);
+	float blue = (float)rand()/(float)(RAND_MAX);
+
+
 	
+
 	
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1');	//draws number 1
-	//glRasterPos2f(175, 200);				// sets new drawing point 
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1' );	//draws number 1
+	 			
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');	//draws number 3
-	//glRasterPos2f(200, 200);				
+
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3'); //draws number 3	
-	//glRasterPos2f(225, 200);				
+
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
-	//glRasterPos2f(250, 200);
 	
-	nameX += 10;
+	nameX += 2;
 	nameX = nameX % 620;
 	
-	
+	glColor3f(red, green, blue);
 	glRasterPos2f(nameX, 100);								//coordinates for my name		
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	//draws number prints my name
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'Y');					
@@ -184,6 +317,9 @@ void myDisplay(void)
 				
 
 	glFlush(); // send all output to display 
+	glColor3f(1, 1, 1);
+	_sleep(15);
+	}
 }
 
 //<<<<<<<<<<<<<<<<<<<<<<<< main >>>>>>>>>>>>>>>>>>>>>>
@@ -195,6 +331,10 @@ void main(int argc, char** argv)
 	glutInitWindowPosition(100, 150); // sets window position on screen
 	glutCreateWindow("<(0_0)> Asteroids <(0_0)>"); // opens the screen window
 	glutDisplayFunc(myDisplay); // registers function
-	myInit(); //initializes values                
+	myInit(); //initializes values      
+	
 	glutMainLoop();	// goes into a perpetual loop
+		
+	         
+	
 }
