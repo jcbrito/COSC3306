@@ -52,7 +52,7 @@ modification:*/
 //<<<<<<<<<<<<<<<<<<<<<<<< myDisplay >>>>>>>>>>>>>>>>>
 void myDisplay(void)
 {
-	while(1){
+	for(int i = 0; i < 1900; i++){
 	glClear(GL_COLOR_BUFFER_BIT); // clears the screen 
 	glBegin(GL_LINES); // draws points
 		// using these coordinates
@@ -88,27 +88,23 @@ void myDisplay(void)
 	
 		    
 	
-		int num = rand() % 4; //random number between 0 and 5 to choose 
+		int num = rand() % 3 ; //random number between 0 and 5 to choose 
 		
 		switch (num)
 		{
 			case 0:					//moves ship to the right
-				point1X += 5;
+				point1X += shipSpeed;
 				break;
 				
 			case 1:
-				point1Y += 5;		//moves the ship up
-				break;	
+				point1Y += shipSpeed;
+				break;
 			
 			case 2:
-				point1X -= 5;		//moves the ship to the left
+				point1X += shipSpeed;
+				point1Y += shipSpeed;
 				break;
-
-			
-			case 3:
-				point1Y -= 5;		//moves the ship down
-				break;						
-				
+									
 		} 
 		
 				//drawing the ship relative to 
@@ -124,19 +120,23 @@ void myDisplay(void)
 				int point4Y = point2Y + 120;
 					
 		
-				point1X %= 560;	//keep the space ship in a certain range
-				point2X %= 560;
-				point3X %= 560;
-				point4X %= 560;
+			if(point1X < 40){ //keep the ship in shape
 				
-				point1Y %= 440;
-				point2Y %= 440;
-				point3Y %= 440;
-				point4Y %= 440;
+				shipSpeed *= -1 ;
 				
-			if(point4Y < point1Y){ //keep the ship in shape
-				point4Y += 120;
-				}	
+				}
+			else if(point1X > 520){
+				shipSpeed *= -1 ;
+				}
+				
+			if(point4Y > 460){
+				shipSpeed *= -1;
+			}
+			
+			else if(point1Y < 40){
+				shipSpeed *= -1;
+			
+			}		
 	
 		glColor3f(1,0,0);
 							
