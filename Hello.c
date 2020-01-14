@@ -283,6 +283,14 @@ void myDisplay(void)
 	
 	
 	glRasterPos2f(35, 450);				// sets drawing point 
+
+	float red = (float)rand()/(float)(RAND_MAX);
+	float green = (float)rand()/(float)(RAND_MAX);
+	float blue = (float)rand()/(float)(RAND_MAX);
+
+
+	
+
 	
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1' );	//draws number 1
 	 			
@@ -295,7 +303,7 @@ void myDisplay(void)
 	nameX += 2;
 	nameX = nameX % 620;
 	
-	
+	glColor3f(red, green, blue);
 	glRasterPos2f(nameX, 100);								//coordinates for my name		
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	//draws number prints my name
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'Y');					
@@ -309,6 +317,7 @@ void myDisplay(void)
 				
 
 	glFlush(); // send all output to display 
+	glColor3f(1, 1, 1);
 	_sleep(15);
 	}
 }
