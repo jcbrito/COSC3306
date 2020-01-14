@@ -9,6 +9,19 @@ modification:*/
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 
+    int nameX = 280;
+    
+    //spaceship coordinates
+    int point1X = 200;
+    int point1Y = 200;
+    
+    int point2X = 300;
+    int point2Y = 200;
+    
+    int point3X = 250;
+    int point3Y = 320;
+    
+
 //You will need to add this to the 'build' (linker) option from your compiler:  -lGL -lglut -lGLU
 //<<<<<<<<<<<<<<<<<<<<<<< myInit >>>>>>>>>>>>>>>>>>>>
  void myInit(void)
@@ -49,47 +62,79 @@ void myDisplay(void)
 		
 		glVertex2i(20, 420);	//line under triangles
 		glVertex2i(100, 420);
-		
-		
-		//making the spaceship (another triangle)
-		
-		glVertex2i(300, 210);	//spaceship
-		glVertex2i(325, 250);
-		glVertex2i(325, 250);
-		glVertex2i(340, 210);
-								//bottom of spaceship
-		glVertex2i(300, 210);		
-		glVertex2i(340, 210);	
-		
-								//left wing
-		glVertex2i(300, 210);		
-		glVertex2i(310, 195);
-				
-		glVertex2i(300, 210);										
-		glVertex2i(295, 220);
-		
-		glVertex2i(295, 220);
-		glVertex2i(280, 195);
-		
-		glVertex2i(280, 195);
-		glVertex2i(310, 195);
-		
-								//right wing
-		//glVertex2i(350, 210);		
-		//glVertex2i(360, 195);
-				
-		glVertex2i(350, 220);										
-		glVertex2i(330, 195);
-		
-		glVertex2i(350, 220);
-		glVertex2i(330, 195);
-		
-		glVertex2i(330, 195);
-		glVertex2i(360, 195);
-		
-
+			
 	glEnd();
 	
+	
+	// this is the spaceship
+	glBegin(GL_POLYGON);
+	
+	
+		int num = rand() % 6; //random number between 0 and 5 to choose 
+		
+		switch (num)
+		{
+			case 0:					//moves ship to the right
+				point1X += 5;
+				point2X += 5;
+				point3X += 5;
+				break;
+				
+			case 1:
+				point1Y += 5;		//moves the ship up
+				point2Y += 5;
+				point3Y += 5;
+				break;	
+			
+			case 2:
+				point1X -= 5;		//moves the ship to the left
+				point2X -= 5;
+				point3X -= 5;
+				break;
+
+			
+			case 3:
+				point1Y -= 5;		//moves the ship down
+				point2Y -= 5;
+				point3Y -= 5;
+				break;			
+			
+			case 4:
+				point1X += 5;
+				point2X += 5;
+				point3X += 5;
+				point1Y += 5;
+				point2Y += 5;
+				point3Y += 5;
+				break;
+				
+			case 5:
+				point1X -= 5;
+				point2X -= 5;
+				point3X -= 5;
+				point1Y -= 5;
+				point2Y -= 5;
+				point3Y -= 5;
+				break;				
+				
+		} 
+		
+		
+				point1X %= 560;
+				point2X %= 560;
+				point3X %= 560;
+				point1Y %= 440;
+				point2Y %= 440;
+				point3Y %= 440;
+	
+		glColor3f(1,0,0);
+		glVertex2i(point1X, point1Y);
+		glVertex2i(point2X, point2Y);
+		glVertex2i(point3X, point3Y);
+	
+	glEnd();
+	
+	glColor3f(1,1,1);
 	
 	glBegin(GL_POINTS);
 		
@@ -122,8 +167,11 @@ void myDisplay(void)
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
 	//glRasterPos2f(250, 200);
 	
+	nameX += 10;
+	nameX = nameX % 620;
 	
-	glRasterPos2f(280, 100);								//coordinates for my name		
+	
+	glRasterPos2f(nameX, 100);								//coordinates for my name		
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	//draws number prints my name
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'Y');					
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ':');					
