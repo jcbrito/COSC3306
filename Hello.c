@@ -12,14 +12,14 @@ modification:*/
     int nameX = 280;
     
     //spaceship coordinates
-    int point1X = 200;
-    int point1Y = 200;
+    int point1X = 200; //point a
+    int point1Y = 200; 
+
     
-    int point2X = 300;
-    int point2Y = 200;
+    //asteroid coordinates
     
-    int point3X = 250;
-    int point3Y = 320;
+    int roid1X = 300;
+    int roid1Y = 300;
     
 
 //You will need to add this to the 'build' (linker) option from your compiler:  -lGL -lglut -lGLU
@@ -67,72 +67,90 @@ void myDisplay(void)
 	
 	
 	// this is the spaceship
-	glBegin(GL_POLYGON);
+	glBegin(GL_LINES);
 	
+		    
 	
-		int num = rand() % 6; //random number between 0 and 5 to choose 
+		int num = rand() % 4; //random number between 0 and 5 to choose 
 		
 		switch (num)
 		{
 			case 0:					//moves ship to the right
 				point1X += 5;
-				point2X += 5;
-				point3X += 5;
 				break;
 				
 			case 1:
 				point1Y += 5;		//moves the ship up
-				point2Y += 5;
-				point3Y += 5;
 				break;	
 			
 			case 2:
 				point1X -= 5;		//moves the ship to the left
-				point2X -= 5;
-				point3X -= 5;
 				break;
 
 			
 			case 3:
 				point1Y -= 5;		//moves the ship down
-				point2Y -= 5;
-				point3Y -= 5;
-				break;			
-			
-			case 4:
-				point1X += 5;
-				point2X += 5;
-				point3X += 5;
-				point1Y += 5;
-				point2Y += 5;
-				point3Y += 5;
-				break;
-				
-			case 5:
-				point1X -= 5;
-				point2X -= 5;
-				point3X -= 5;
-				point1Y -= 5;
-				point2Y -= 5;
-				point3Y -= 5;
-				break;				
+				break;						
 				
 		} 
 		
+				//drawing the ship relative to 
+				// the starting point
+				int point2X = point1X + 50; //point b
+				int point2Y = point1Y + 30;
+				
+				
+				int point3X = point2X + 50; //point c
+				int point3Y = point2Y - 30;
+				
+				int point4X = point3X - 50; //point d
+				int point4Y = point2Y + 120;
+					
 		
-				point1X %= 560;
+				point1X %= 560;	//keep the space ship in a certain range
 				point2X %= 560;
 				point3X %= 560;
+				point4X %= 560;
+				
 				point1Y %= 440;
 				point2Y %= 440;
 				point3Y %= 440;
+				point4Y %= 440;
+				
+			if(point4Y < point1Y){ //keep the ship in shape
+				point4Y += 120;
+				}	
 	
 		glColor3f(1,0,0);
-		glVertex2i(point1X, point1Y);
+							
+		//drawing the ship 
+		glVertex2i(point1X, point1Y); //Point A		
 		glVertex2i(point2X, point2Y);
+		
+		glVertex2i(point2X, point2Y); //Point B
 		glVertex2i(point3X, point3Y);
+		
+		glVertex2i(point3X, point3Y); //Point C
+		glVertex2i(point4X, point4Y);
+		
+		glVertex2i(point4X, point4Y); //Point D
+		glVertex2i(point1X, point1Y);
+
 	
 	glEnd();
+	
+	
+			// drwaing some asteroids 
+	glBegin(GL_POLYGON);
+		
+		
+		
+	
+	
+	glEnd();
+	
+	
+	
 	
 	glColor3f(1,1,1);
 	
