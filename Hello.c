@@ -1,5 +1,6 @@
 /*Use this at the top of your file to make it compile on either Windows or Linux without requiring any
 modification:*/
+#include <dos.h>
 #ifdef _WIN32
 #include <windows.h>
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
@@ -18,8 +19,15 @@ modification:*/
     
     //asteroid coordinates
     
-    int roid1X = 300;
-    int roid1Y = 300;
+    int roid1X = 400;
+    int roid1Y = 400;
+    
+    int roid2X = 100;
+    int roid2Y = 190;
+    
+    int roid3X = 400;
+    int roid3Y = 200;
+    
     
 
 //You will need to add this to the 'build' (linker) option from your compiler:  -lGL -lglut -lGLU
@@ -36,6 +44,7 @@ modification:*/
 //<<<<<<<<<<<<<<<<<<<<<<<< myDisplay >>>>>>>>>>>>>>>>>
 void myDisplay(void)
 {
+	while(1){
 	glClear(GL_COLOR_BUFFER_BIT); // clears the screen 
 	glBegin(GL_LINES); // draws points
 		// using these coordinates
@@ -141,12 +150,82 @@ void myDisplay(void)
 	
 	
 			// drwaing some asteroids 
-	glBegin(GL_POLYGON);
-		
-		
-		
+	glBegin(GL_LINES);
 	
+		glColor3f(1,1,1);
+		
+		roid1X += 1;
+		
+		if(roid1X > 490){
+			roid1X = 400;
+		}
+		
+		glVertex2i(roid1X, roid1Y);				//point A
+		glVertex2i(roid1X + 10, roid1Y + 50);
+		
+		glVertex2i(roid1X + 10, roid1Y + 50);	//Point B
+		glVertex2i(roid1X + 50, roid1Y + 50);
+
+		glVertex2i(roid1X + 50, roid1Y + 50);	//Point C
+		glVertex2i(roid1X + 70, roid1Y + 25);
+
+		glVertex2i(roid1X + 70, roid1Y + 25);	//Point D
+		glVertex2i(roid1X + 50, roid1Y );
+
+		glVertex2i(roid1X + 50, roid1Y );		//Point E
+		glVertex2i(roid1X + 25, roid1Y + 25);
 	
+		glVertex2i(roid1X + 25, roid1Y + 25);	//Point F
+		glVertex2i(roid1X, roid1Y);
+		
+		
+		// second asteroid
+		roid2Y += 1;
+		roid2Y %= 190;
+		glVertex2i(roid2X, roid2Y);				//point A
+		glVertex2i(roid2X + 10, roid2Y + 50);
+		
+		glVertex2i(roid2X + 10, roid2Y + 50);	//Point B
+		glVertex2i(roid2X + 50, roid2Y + 50);
+
+		glVertex2i(roid2X + 50, roid2Y + 50);	//Point C
+		glVertex2i(roid2X + 70, roid2Y + 25);
+
+		glVertex2i(roid2X + 70, roid2Y + 25);	//Point D
+		glVertex2i(roid2X + 50, roid2Y );
+
+		glVertex2i(roid2X + 50, roid2Y );	//Point E
+		glVertex2i(roid2X + 25, roid2Y + 25);
+	
+		glVertex2i(roid2X + 25, roid2Y + 25);	//Point F
+		glVertex2i(roid2X, roid2Y);
+		
+		// third asteroid
+		roid3Y += 1;
+		
+		if(roid3Y > 240){
+			roid3Y = 190;
+		}
+		
+		glVertex2i(roid3X, roid3Y);				//point A
+		glVertex2i(roid3X + 10, roid3Y + 50);
+		
+		glVertex2i(roid3X + 10, roid3Y + 50);	//Point B
+		glVertex2i(roid3X + 50, roid3Y + 50);
+
+		glVertex2i(roid3X + 50, roid3Y + 50);	//Point C
+		glVertex2i(roid3X + 70, roid3Y + 25);
+
+		glVertex2i(roid3X + 70, roid3Y + 25);	//Point D
+		glVertex2i(roid3X + 50, roid3Y );
+
+		glVertex2i(roid3X + 50, roid3Y );	//Point E
+		glVertex2i(roid3X + 25, roid3Y + 25);
+	
+		glVertex2i(roid3X + 25, roid3Y + 25);	//Point F
+		glVertex2i(roid3X, roid3Y);		
+		
+
 	glEnd();
 	
 	
@@ -175,17 +254,15 @@ void myDisplay(void)
 	
 	glRasterPos2f(35, 450);				// sets drawing point 
 	
-	
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1');	//draws number 1
-	//glRasterPos2f(175, 200);				// sets new drawing point 
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1' );	//draws number 1
+	 			
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');	//draws number 3
-	//glRasterPos2f(200, 200);				
+
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3'); //draws number 3	
-	//glRasterPos2f(225, 200);				
+
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
-	//glRasterPos2f(250, 200);
 	
-	nameX += 10;
+	nameX += 3;
 	nameX = nameX % 620;
 	
 	
@@ -202,6 +279,8 @@ void myDisplay(void)
 				
 
 	glFlush(); // send all output to display 
+	_sleep(15);
+	}
 }
 
 //<<<<<<<<<<<<<<<<<<<<<<<< main >>>>>>>>>>>>>>>>>>>>>>
@@ -213,6 +292,10 @@ void main(int argc, char** argv)
 	glutInitWindowPosition(100, 150); // sets window position on screen
 	glutCreateWindow("<(0_0)> Asteroids <(0_0)>"); // opens the screen window
 	glutDisplayFunc(myDisplay); // registers function
-	myInit(); //initializes values                
+	myInit(); //initializes values      
+	
 	glutMainLoop();	// goes into a perpetual loop
+		
+	         
+	
 }
