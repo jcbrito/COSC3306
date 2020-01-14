@@ -28,6 +28,14 @@ modification:*/
     int roid3X = 400;
     int roid3Y = 200;
     
+    //roid speeds
+ 	int roidSpeed1 = 1;
+ 	int roidSpeed2 = 1;
+ 	int roidSpeed3 = 1;
+ 	
+ 	//ship speed
+	int shipSpeed = 1;
+    
     
 
 //You will need to add this to the 'build' (linker) option from your compiler:  -lGL -lglut -lGLU
@@ -154,11 +162,17 @@ void myDisplay(void)
 	
 		glColor3f(1,1,1);
 		
-		roid1X += 1;
+		
+		roid1X += roidSpeed1;
 		
 		if(roid1X > 490){
-			roid1X = 400;
+			roidSpeed1 *= -1;
 		}
+		else if( roid1X < 399){
+			roidSpeed1 *= -1;
+
+		}
+		
 		
 		glVertex2i(roid1X, roid1Y);				//point A
 		glVertex2i(roid1X + 10, roid1Y + 50);
@@ -180,8 +194,17 @@ void myDisplay(void)
 		
 		
 		// second asteroid
-		roid2Y += 1;
-		roid2Y %= 190;
+		
+				
+		if(roid2Y > 280){
+			roidSpeed2 *= -1;
+		}
+		else if( roid2Y < 150){
+			roidSpeed2 *= -1;
+
+		}
+		
+		roid2Y += roidSpeed2;
 		glVertex2i(roid2X, roid2Y);				//point A
 		glVertex2i(roid2X + 10, roid2Y + 50);
 		
@@ -201,11 +224,18 @@ void myDisplay(void)
 		glVertex2i(roid2X, roid2Y);
 		
 		// third asteroid
-		roid3Y += 1;
 		
-		if(roid3Y > 240){
-			roid3Y = 190;
+		
+		if(roid3Y > 280){
+			roidSpeed3 *= -1;
 		}
+		else if( roid3Y < 190){
+			roidSpeed3 *= -1;
+
+		}
+		
+		roid3Y += roidSpeed3;
+
 		
 		glVertex2i(roid3X, roid3Y);				//point A
 		glVertex2i(roid3X + 10, roid3Y + 50);
@@ -262,7 +292,7 @@ void myDisplay(void)
 
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
 	
-	nameX += 3;
+	nameX += 2;
 	nameX = nameX % 620;
 	
 	
