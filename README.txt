@@ -27,8 +27,8 @@ a random four-digit number.
 
 Building this scene was not too difficult, but it was a bit time consuming searching for ways the add new
 features to it. The animation was achieved by putting the whole myDisplay() function
-in a while loop. If i had more time i would of looked for a better way to animate the scene
-as this method seems to be unstable. But for now this is what i have and hopefully 
+in a while loop. If i had more time I would have looked for a better way to animate the scene
+as this method seems to be unstable. But for now, this is what i have and hopefully 
 anyone seeing it can enjoy it. once the animation stops the user may click on the 
 image to start a new animation with new random values. 
 
