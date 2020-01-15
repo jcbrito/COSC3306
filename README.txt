@@ -1,4 +1,4 @@
-This program is based on the classic game asteroids, but many things are different as i made up 
+This program is based on the classic game asteroids, but many things are different as I made up 
 stuff while learning how to use OpenGL and FeeGlut. Most of the shapes are drawn
 using the GL_LINES function. This is the first assignment for the class
 COSC 3306 (Introduction to computer graphics). This scene was created using simple
@@ -12,7 +12,7 @@ GL_LINES function. the spaceship has one starting coordinate (X, Y) and all the 
 relative to that starting coordinate. for example, point a = (X, Y) and point b = (point a X + 50, point a Y + 30). this makes 
 it easier to control the movements of the ship as only one set of coordinates needs to be adjusted.
 
-The asteroids are drwan the same way. the only difference is the starting position. Asteroids movement is
+The asteroids are drawn the same way. the only difference is the starting position. Asteroids movement is
 fixed, meaning that it will move in one direction until a certain X or Y location is reached, then it will
 reverse the direction until another X or Y location is reached and repeat.
 
