@@ -1,5 +1,18 @@
 /*Use this at the top of your file to make it compile on either Windows or Linux without requiring any
-modification:*/
+modification:
+* 
+* 	Name: Juan Brito
+* 	Course: COSC 3306
+* 	Date: Jan 15 2020
+* 	Description: This program is based off the classic game
+* 				 asteroids. this is a simple scene with simple 
+* 				 animations. this drawing is made up of mostly 
+* 				 lines. Thanks to Professor Miguel for providing
+* 				 the starting code (HelloWorld.c). The original 
+* 				 file was used as a basis for learning
+* 				 FreeGlut and open GL. 
+* 
+* */
 #include <dos.h>
 #ifdef _WIN32
 #include <windows.h>
