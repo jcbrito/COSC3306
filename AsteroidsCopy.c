@@ -301,17 +301,27 @@ void myDisplay(void)
 	float green = (float)rand()/(float)(RAND_MAX);
 	float blue = (float)rand()/(float)(RAND_MAX);
 
-
+	int scoreInt = rand() % 10000 + 1000;
+	char scoreStr[5];
+	itoa(scoreInt, scoreStr, 10);
 	
-
 	
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1' );	//draws number 1
+	//this was how the score was hard coded before
+	
+	//glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1' );	//draws number 1
 	 			
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');	//draws number 3
+	//glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');	//draws number 3
 
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3'); //draws number 3	
+	//glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3'); //draws number 3	
 
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
+	//glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
+	
+	
+	//once i learned about String function it was easier
+	// to create a random score every time the scene
+	//is repainted.
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, scoreStr);
+	
 	
 	nameX += 2;
 	nameX = nameX % 620;
