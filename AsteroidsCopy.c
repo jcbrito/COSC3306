@@ -52,7 +52,7 @@ modification:*/
 //<<<<<<<<<<<<<<<<<<<<<<<< myDisplay >>>>>>>>>>>>>>>>>
 void myDisplay(void)
 {
-	for(int i = 0; i < 1900; i++){
+	for(int i = 0; i < 250; i++){
 	glClear(GL_COLOR_BUFFER_BIT); // clears the screen 
 	glBegin(GL_LINES); // draws points
 		// using these coordinates
@@ -318,7 +318,7 @@ void myDisplay(void)
 
 	glFlush(); // send all output to display 
 	glColor3f(1, 1, 1);
-	_sleep(15);
+	_sleep(19);
 	}
 }
 
