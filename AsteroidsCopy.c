@@ -23,6 +23,11 @@ modification:
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 
+    //these are constant coordinates for objects
+    // the are global variables so that the objects
+    // can be controlled by only modifying one
+    // set of coordinates.
+    
     int nameX = 280;
     
     //spaceship coordinates
@@ -67,8 +72,8 @@ void myDisplay(void)
 {
 	for(int i = 0; i < 250; i++){
 	glClear(GL_COLOR_BUFFER_BIT); // clears the screen 
-	glBegin(GL_LINES); // draws points
-		// using these coordinates
+	glBegin(GL_LINES); 
+		// using these coordinates we will drway the triangles under the score
 		glVertex2i(20, 420);	//triangle 1
 		glVertex2i(30, 440);
 		glVertex2i(30, 440);	
@@ -105,9 +110,9 @@ void myDisplay(void)
 		
 		switch (num)
 		{
-			case 0:					//moves ship to the right
-				point1X += shipSpeed;
-				break;
+			case 0:							//moves ship depending on a random
+				point1X += shipSpeed;		//number generated between 0 and 2 
+				break;						// inclusive
 				
 			case 1:
 				point1Y += shipSpeed;
@@ -138,8 +143,8 @@ void myDisplay(void)
 				shipSpeed *= -1 ;
 				
 				}
-			else if(point1X > 520){
-				shipSpeed *= -1 ;
+			else if(point1X > 520){		//checks the limits of the position of the ship
+				shipSpeed *= -1 ;		// keeps it in a certain area in the screen
 				}
 				
 			if(point4Y > 460){
@@ -151,7 +156,7 @@ void myDisplay(void)
 			
 			}		
 	
-		glColor3f(1,0,0);
+		glColor3f(1,0,0);				//set the color to red
 							
 		//drawing the ship 
 		glVertex2i(point1X, point1Y); //Point A		
@@ -178,7 +183,7 @@ void myDisplay(void)
 		
 		roid1X += roidSpeed1;
 		
-		if(roid1X > 490){
+		if(roid1X > 490){						//checks the limits of the position of the asteroid
 			roidSpeed1 *= -1;
 		}
 		else if( roid1X < 399){
@@ -209,7 +214,7 @@ void myDisplay(void)
 		// second asteroid
 		
 				
-		if(roid2Y > 280){
+		if(roid2Y > 280){					//checks the limits of the position of the asteroid
 			roidSpeed2 *= -1;
 		}
 		else if( roid2Y < 150){
@@ -238,8 +243,8 @@ void myDisplay(void)
 		
 		// third asteroid
 		
-		
-		if(roid3Y > 280){
+			
+		if(roid3Y > 280){					//checks the limits of the position of the asteroid
 			roidSpeed3 *= -1;
 		}
 		else if( roid3Y < 190){
@@ -247,7 +252,7 @@ void myDisplay(void)
 
 		}
 		
-		roid3Y += roidSpeed3;
+		roid3Y += roidSpeed3;				//moves this asteroid
 
 		
 		glVertex2i(roid3X, roid3Y);				//point A
@@ -284,10 +289,10 @@ void myDisplay(void)
 		
 		for(int i = 0; i < 50; i++){
 			
-			int random_X = rand() % 640;
-			int random_Y = rand() % 480;
+			int random_X = rand() % 640;	//generating random X Y coordinates to
+			int random_Y = rand() % 480;	// dynamically put stars on the screen
 			
-			glVertex2i(random_X, random_Y);
+			glVertex2i(random_X, random_Y);	// puting a dot at the randomly generated X Y coordinate.
 			
 		}
 		
@@ -301,9 +306,9 @@ void myDisplay(void)
 	float green = (float)rand()/(float)(RAND_MAX);
 	float blue = (float)rand()/(float)(RAND_MAX);
 
-	int scoreInt = rand() %9000 + 1000;
+	int scoreInt = rand() %9000 + 1000;					//this is generating the random score
 	char scoreStr[5];
-	itoa(scoreInt, scoreStr, 10);
+	itoa(scoreInt, scoreStr, 10);						//changing the int into a String
 	
 	
 
@@ -317,15 +322,15 @@ void myDisplay(void)
 	//glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7'); //draws number 7	
 	
 	
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, scoreStr);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, scoreStr);	// a way to display a randomized score
 	
 	
-	nameX += 2;
-	nameX = nameX % 620;
+	nameX += 2;												// this moves my name across the X-axis in the right direction
+	nameX = nameX % 620;									//once it reaches the X value of 620 it is returned to the left 
 	
-	glColor3f(red, green, blue);
+	glColor3f(red, green, blue);							//using the 3 random floats we will get a random color
 	glRasterPos2f(nameX, 100);								//coordinates for my name		
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	//draws number prints my name
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'B');	
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'Y');					
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ':');					
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'J');					
@@ -337,8 +342,8 @@ void myDisplay(void)
 				
 
 	glFlush(); // send all output to display 
-	glColor3f(1, 1, 1);
-	_sleep(19);
+	glColor3f(1, 1, 1);										//resets the color back to white
+	_sleep(19);												// a delay to make the animation smoother
 	}
 }
 
