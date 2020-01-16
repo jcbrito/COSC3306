@@ -1,3 +1,5 @@
+Juan Brito
+
 This program is based on the classic game asteroids, but many things are different as I made up 
 stuff while learning how to use OpenGL and FeeGlut. Most of the shapes are drawn
 using the GL_LINES function. This is the first assignment for the class
@@ -5,7 +7,6 @@ COSC 3306 (Introduction to computer graphics). This scene was created using simp
 shapes and lines. While the scene is displayed, the user can click on the scene to rerun the animation. 
 each time the animation runs, the ship and stars will be in different locations. Random colors 
 and locations are generated using the C rand() function. 
-
 
 The ship is made up of 4 different points (a, b, c, d) and are drawn using the 
 GL_LINES function. the spaceship has one starting coordinate (X, Y) and all the other points are drawn
@@ -27,11 +28,28 @@ a random four-digit number.
 
 Building this scene was not too difficult, but it was a bit time consuming searching for ways the add new
 features to it. The animation was achieved by putting the whole myDisplay() function
-in a while loop. If i had more time I would have looked for a better way to animate the scene
-as this method seems to be unstable. But for now, this is what i have and hopefully 
+in a while loop with a delay. If I had more time, I would have looked for a better way to animate the scene as this method seems to be unstable. But for now, this is what I have and hopefully 
 anyone seeing it can enjoy it. once the animation stops the user may click on the 
 image to start a new animation with new random values. 
 
+In order to display these graphics, they must go through the graphics rendering pipeline. According to the link in the assignment page the pipeline consists of the following stages:
+•	Vertex Specification
+•	Vertex Processing
+•	Vertex Post-processing
+•	Primitive Assembly
+•	Rasterization
+•	Fragment Processing
+•	Per-Sample Operations
+
+
+At the Vertex Specification stage, the specified vertices are set up to be sent through the pipeline. For example, when we specify a line and pass it a pair of X Y coordinates those will be prepared to be sent through the pipeline by placing the corresponding data into a Vertex Array Object and a Vertex Buffer Object. In this stage we deal with Vertex Array Objects and Vertex Buffer Objects. The Vertex Array Object holds the state needed to provide vertex data, and the Vertex Buffer Object holds the actual data of the vertex. After it is put into the appropriate array or buffer object, a drawing command will render it as a primitive. This is a confusing part for me, and there is a lot to learn in regards of Vertex Array Objects and Vertex Buffer Objects.
+During the Vertex Processing stage, the programmer can customize how the vertices will be processed using Vertex shaders, Tessellation, or a Geometry Shader.
+The Vertex Post-processing deals with applying fixed-functions to vertices. Some of these functions are Transform Feedback and Clipping. These functions will store information about a primitive transformed by the user or will clip the primitive into multiple ones in order to fit it into the viewing volume.
+At the Primitive Assembly stage, the specified vertices are assembled into simple primitives such as lines, points, and triangles. A process called Face culling happens here which avoids rendering primitives that will not be in the view of the user in order to not waste resources.
+Next is the Rasterization stage, which deals with fragmenting primitives. In the fragment there is important information such as position on screen, and other data that was calculated by previous steps.
+The Fragment Processing deals with processing the fragments created in the previous step of the pipeline. This stage uses Fragment shaders in order to give color and depth to the fragment.
+Finally, there is the Per-Sample Operations which deals with passing each fragment through some tests. The tests are Pixel ownership test, Scissor Test, Stencil Test, and Depth test. If the fragment does not pass the test it will then not be shown. The user can enable and disable some of these tests. Fragments that pass this series of tests are then sent to the framebuffer which then will be displayed on the screen for the user to see.
+	
 Thank you for reading!
 
 
